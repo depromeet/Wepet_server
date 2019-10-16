@@ -1,0 +1,116 @@
+= API Document
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 3
+:sectlinks:
+:snippets: ../../../build/generated-snippets
+
+== Category API
+
+[[category-list]]
+
+=== Get list of Category
+
+==== Request
+
+include::{snippets}/GET_categories/http-request.adoc[]
+
+==== Response
+
+include::{snippets}/GET_categories/response-fields.adoc[]
+
+===== Response example
+
+include::{snippets}/GET_categories/response-body.adoc[]
+
+[[category]]
+
+=== Get Category
+
+==== Request
+
+include::{snippets}/GET_category/http-request.adoc[]
+
+==== pathParameters
+
+include::{snippets}/GET_category/path-parameters.adoc[]
+
+==== Response
+
+include::{snippets}/GET_category/response-fields.adoc[]
+
+===== Response example
+
+include::{snippets}/GET_category/response-body.adoc[]
+
+[[category]]
+
+=== POST Category
+
+==== Request
+
+include::{snippets}/POST_category/http-request.adoc[]
+
+==== Request Filed
+
+include::{snippets}/POST_category/request-fields.adoc[]
+
+==== Request Body
+
+include::{snippets}/POST_category/request-body.adoc[]
+
+==== Response
+
+include::{snippets}/POST_category/response-fields.adoc[]
+
+===== Response example
+
+include::{snippets}/POST_category/response-body.adoc[]
+
+
+[[category]]
+
+=== PUT Category
+
+==== Request
+
+include::{snippets}/PUT_category/http-request.adoc[]
+
+==== Request Filed
+
+include::{snippets}/PUT_category/request-fields.adoc[]
+
+==== Request Body
+
+include::{snippets}/PUT_category/request-body.adoc[]
+
+==== Response
+
+include::{snippets}/PUT_category/response-fields.adoc[]
+
+===== Response example
+
+include::{snippets}/PUT_category/response-body.adoc[]
+
+
+[[category]]
+
+=== DELETE Category
+
+==== Request
+
+include::{snippets}/DELETE_category/http-request.adoc[]
+
+==== pathParameters
+
+include::{snippets}/DELETE_category/path-parameters.adoc[]
+
+==== Response
+
+include::{snippets}/DELETE_category/response-fields.adoc[]
+
+===== Response example
+
+include::{snippets}/DELETE_category/response-body.adoc[]
