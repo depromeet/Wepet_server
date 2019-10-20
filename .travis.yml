@@ -1,0 +1,22 @@
+language: java
+jdk:
+  - openjdk8
+sudo: required
+branches:
+  only:
+    - feature/ci
+env:
+  - TAG="$(git rev-parse --short HEAD)"
+notifications:
+  email:
+    - sumusb34@gmail.com
+  on_success: always
+  on_failure: always
+script:
+  - ./gradlew booJar
+  - docker build -t wepet-docker-registry/wepet:${TAG} .
+deploy:
+  provider: s3
+  access_key_id: ${S3_ACCESS_KEY}
+  secret_access_key: ${S3_SECRET}
+  bucket: "wepet-docker-registry"
