@@ -1,0 +1,37 @@
+spring:
+  profiles:
+    active: local
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor
+---
+spring:
+  profiles: local
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://wepet-dev.cyhugcavufto.ap-northeast-2.rds.amazonaws.com:3306/wepet?useUnicode=true&characterEncoding=utf8
+    username: ENC(I8A92gmwojo+8bwB2sO1Qg==)
+    password: ENC(dG3X3mPGqsDAHUjQIZD4qT0JVsrU+bSc)
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: update
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+      base-path: /
+      path-mapping:
+        health: healthcheck
+  endpoint:
+    health:
+      show-details: always
+      db:
+        enabled: true
+      diskspace:
+        enabled: true

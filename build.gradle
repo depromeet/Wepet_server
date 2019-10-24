@@ -61,4 +61,11 @@ dependencies {
 
     testCompile('io.rest-assured:rest-assured:3.0.2') // for rest assured
     testCompile('org.springframework.restdocs:spring-restdocs-restassured') // for rest assured
+
+    // https://mvnrepository.com/artifact/com.github.ulisesbocchio/jasypt-spring-boot-starter
+    implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:2.1.0'
+}
+
+test {
+    systemProperty "password", "${password}"
 }
