@@ -19,7 +19,7 @@ install:
 before_script:
   - pip install --user awscli
 script:
-  - gradle bootJar --stacktrace -Ppassword=${ENCRIPTION_KEY}
+  - gradle bootJar -Ppassword=${ENCRIPTION_KEY}
   - eval $(aws ecr get-login --no-include-email)
   - docker build -t 989243724240.dkr.ecr.ap-northeast-2.amazonaws.com/wepet:${TAG} .
-  - docker push 989243724240.dkr.ecr.ap-northeast-2.amazonaws.com/wepet/wepet:${TAG}
+  - docker push 989243724240.dkr.ecr.ap-northeast-2.amazonaws.com/wepet:${TAG}
