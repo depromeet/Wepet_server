@@ -27,7 +27,7 @@ sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 
 archivesBaseName = 'wepet'
-version = 'latest'
+version = ''
 
 apply plugin: 'org.asciidoctor.convert'
 apply plugin: 'io.spring.dependency-management'
