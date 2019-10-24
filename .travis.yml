@@ -4,7 +4,7 @@ jdk:
 sudo: required
 branches:
   only:
-    - feature/ci
+    - develop
 services:
   - docker
 env:
