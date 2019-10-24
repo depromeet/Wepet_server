@@ -16,8 +16,8 @@ notifications:
   on_failure: always
 before_script:
   - pip install --user awscli
-  - chmod +x gradle/wrapper/gradle-wrapper.jar
 script:
+  - chmod +x gradle/wrapper/gradle-wrapper.jar
   - gradle bootJar -Ppassword=${ENCRIPTION_KEY}
   - eval $(aws ecr get-login --no-include-email)
   - docker build -t 989243724240.dkr.ecr.ap-northeast-2.amazonaws.com/wepet:${TAG} .
