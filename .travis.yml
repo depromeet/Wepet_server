@@ -16,7 +16,7 @@ notifications:
   on_failure: always
 before_script:
   - pip install --user awscli
-  - chmod +x gradlew
+  - chmod +x gradle/wrapper/gradle-wrapper.jar
 script:
   - gradle bootJar -Ppassword=${ENCRIPTION_KEY}
   - eval $(aws ecr get-login --no-include-email)
