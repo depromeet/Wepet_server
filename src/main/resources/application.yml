@@ -10,8 +10,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://wepet-dev.cyhugcavufto.ap-northeast-2.rds.amazonaws.com:3306/wepet?useUnicode=true&characterEncoding=utf8
-    username: ENC(I8A92gmwojo+8bwB2sO1Qg==)
-    password: ENC(dG3X3mPGqsDAHUjQIZD4qT0JVsrU+bSc)
+    username: ENC(tKavxq6drPDnrN5H9F9aqA==)
+    password: ENC(YYN37FWK3AEk/w6usxt97T8i//UgezEJ)
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
@@ -35,3 +35,7 @@ management:
         enabled: true
       diskspace:
         enabled: true
+weather:
+  api:
+    key: ENC(HYnh90OK2utnJ5gqc87vYIvfCZ5Y6iWh4Yce2HZxiA3yoiDXJO7mq27zJpJiVUzw)
+    url: http://api.openweathermap.org/data/2.5/weather
