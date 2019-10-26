@@ -114,3 +114,25 @@ include::{snippets}/DELETE_category/response-fields.adoc[]
 ===== Response example
 
 include::{snippets}/DELETE_category/response-body.adoc[]
+
+
+== Weather API
+
+=== Get Weather
+
+
+==== Request
+
+include::{snippets}/GET_weather/http-request.adoc[]
+
+==== pathParameters
+
+include::{snippets}/GET_weather/path-parameters.adoc[]
+
+==== Response
+
+include::{snippets}/GET_weather/response-fields.adoc[]
+
+===== Response example
+
+include::{snippets}/GET_weather/response-body.adoc[]

@@ -67,5 +67,9 @@ dependencies {
 }
 
 test {
-    systemProperty "password", "${password}"
+    if (!project.hasProperty('password')) {
+        println 'not found password'
+    } else {
+        systemProperty "password", "${password}"
+    }
 }
