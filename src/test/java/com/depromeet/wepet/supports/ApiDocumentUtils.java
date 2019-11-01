@@ -11,7 +11,7 @@ public interface ApiDocumentUtils {
         return preprocessRequest(
                 modifyUris() // (1)
                         .scheme("http")
-                        .host("wepet.depromeet.com")
+                        .host("ec2-54-180-149-69.ap-northeast-2.compute.amazonaws.com")
                         .removePort(),
                 prettyPrint()); // (2)
     }

@@ -136,3 +136,48 @@ include::{snippets}/GET_weather/response-fields.adoc[]
 ===== Response example
 
 include::{snippets}/GET_weather/response-body.adoc[]
+
+
+== Location API
+
+=== Get Locations
+
+==== Request
+
+include::{snippets}/GET_locations/http-request.adoc[]
+
+==== pathParameters
+
+include::{snippets}/GET_locations/path-parameters.adoc[]
+
+==== RequestParameters
+
+include::{snippets}/GET_locations/request-parameters.adoc[]
+
+
+==== Response
+
+include::{snippets}/GET_locations/response-fields.adoc[]
+
+===== Response example
+
+include::{snippets}/GET_locations/response-body.adoc[]
+
+
+=== Get Location
+
+==== Request
+
+include::{snippets}/GET_location/http-request.adoc[]
+
+==== pathParameters
+
+include::{snippets}/GET_location/path-parameters.adoc[]
+
+==== Response
+
+include::{snippets}/GET_location/response-fields.adoc[]
+
+===== Response example
+
+include::{snippets}/GET_location/response-body.adoc[]

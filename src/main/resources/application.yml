@@ -39,3 +39,8 @@ weather:
   api:
     key: ENC(HYnh90OK2utnJ5gqc87vYIvfCZ5Y6iWh4Yce2HZxiA3yoiDXJO7mq27zJpJiVUzw)
     url: http://api.openweathermap.org/data/2.5/weather
+google:
+  api:
+    key: ENC(QQ/RtYS4fOmFVbkREk81Xt1F1JBS9QXCCJAouZJXm391sygjSjKx4ERc07mF7xL9)
+    url: https://maps.googleapis.com/maps/api/place
+    fields: photos,formatted_address,name,rating,opening_hours,geometry
