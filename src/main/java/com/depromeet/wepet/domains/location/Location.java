@@ -1,9 +1,11 @@
 package com.depromeet.wepet.domains.location;
 
+import com.depromeet.wepet.config.GoogleConfig;
 import com.depromeet.wepet.domains.location.google.PlaceApiResponse;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 
 @Data
@@ -24,8 +26,9 @@ public class Location {
 
     private static String url = "https://maps.googleapis.com/maps/api/place";
 
-    public static Location of(PlaceApiResponse.Result placeApiResponse, double latitude, double longitude) {
-        String photoUrl = !CollectionUtils.isEmpty(placeApiResponse.getPhotos()) ? url + "/photo?maxwidth=?&photoreference=" + placeApiResponse.getPhotos().get(0).getPhotoReference() : null;
+    public static Location of(PlaceApiResponse.Result placeApiResponse, double latitude, double longitude, String apiKey) {
+        String photoUrl = !CollectionUtils.isEmpty(placeApiResponse.getPhotos()) ? url + "/photo?maxwidth=" + placeApiResponse.getPhotos().get(0).getWidth() + "&photoreference=" + placeApiResponse.getPhotos().get(0).getPhotoReference() : null;
+        photoUrl += "&key=" + apiKey;
         return Location
                 .builder()
                 .name(placeApiResponse.getName())

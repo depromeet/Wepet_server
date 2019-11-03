@@ -49,7 +49,7 @@ public class LocationService {
         List<PlaceApiResponse.Result> list = results.get();
         List<Location> locationList = list
                 .stream()
-                .map(res -> Location.of(res, latitude, longitude))
+                .map(res -> Location.of(res, latitude, longitude, googleApiKey))
                 .collect(Collectors.toList());
         locationList.sort(locationComparator);
         List<Location> subLocationList = locationList.subList((pageable.getPageNumber() - 1) * pageable.getPageSize(), pageable.getPageNumber() * pageable.getPageSize());
@@ -62,7 +62,7 @@ public class LocationService {
         if (!results.isPresent()) {
             return null;
         }
-        return Location.of(results.get(), latitude, longitude);
+        return Location.of(results.get(), latitude, longitude, googleApiKey);
     }
 
 }
