@@ -34,28 +34,12 @@ spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://wepet.c9hvacjkfrbx.ap-northeast-2.rds.amazonaws.com:3306/wepet?useUnicode=true&characterEncoding=utf8
-    username: ENC(5uOaaNR4Lil43YszR0egn+pr0NlfZMbF)
-    password: ENC(i0qETP6tTt2dCKbE8SGCdY5D9s5KcqCv)
+    username: ENC(ijitZXr6ipxf1HI2GpdDYgkr+nfmv1Nv)
+    password: ENC(KVkzKM/Y8n51aivT0hzVRiP/zEnIiBGI)
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
       ddl-auto: update
-      naming:
-        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-    show-sql: true
----
-spring:
-  profiles: dev
-  datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://wepet.c9hvacjkfrbx.ap-northeast-2.rds.amazonaws.com:3306/wepet?useUnicode=true&characterEncoding=utf8
-    username: ENC(5uOaaNR4Lil43YszR0egn+pr0NlfZMbF)
-    password: ENC(i0qETP6tTt2dCKbE8SGCdY5D9s5KcqCv)
-  jpa:
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    hibernate:
-      ddl-auto: none
       naming:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
