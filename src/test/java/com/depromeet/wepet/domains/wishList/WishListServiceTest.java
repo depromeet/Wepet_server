@@ -36,7 +36,7 @@ public class WishListServiceTest {
 
     @Test
     public void 즐겨찾기_조회() {
-        Page<List<WishList>> wishList = wishListService.selectByDeviceId("123123",new PageRequest(1, 10));
+        List<WishList> wishList = wishListService.selectByDeviceId("123123");
         Assert.assertNotNull(wishList);
 
     }

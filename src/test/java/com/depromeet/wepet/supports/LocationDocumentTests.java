@@ -64,6 +64,7 @@ public class LocationDocumentTests {
         double longitude = 129.950055;
         long distance = 3000;
         long categoryId = 200;
+        String deviceId = "12321";
 
         Pageable pageable = new PageRequest(1, 10);
 
@@ -78,10 +79,10 @@ public class LocationDocumentTests {
 
         List<Location> locationList = Arrays.asList(location);
 
-        given(locationService.getLocations(latitude, longitude, distance, categoryId, pageable)).willReturn(new DefaultPage(locationList, pageable, 1));
+        given(locationService.getLocations(latitude, longitude, distance, categoryId, pageable, deviceId)).willReturn(new DefaultPage(locationList, pageable, 1));
 
         ResultActions result = this.mockMvc.perform(
-                RestDocumentationRequestBuilders.get("/api/location/{latitude}/{longitude}?distance={distance}&categoryId={categoryId}&page=1&size=10", latitude, longitude, distance, categoryId)
+                RestDocumentationRequestBuilders.get("/api/location/{latitude}/{longitude}?distance={distance}&categoryId={categoryId}&page=1&size=10&deviceId={deviceId}", latitude, longitude, distance, categoryId, deviceId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
         );
@@ -96,9 +97,10 @@ public class LocationDocumentTests {
                         ),
                         requestParameters(
                                 parameterWithName("distance").description("search distance").attributes(key("defaultValue").value("3000")).optional(),
-                                parameterWithName("categoryId").description("search categoryId if categoryId is Empty, all Category search").attributes(key("defaultValue").value("0")).optional(),
+                                parameterWithName("categoryId").description("search categoryId if categoryId is -1, favorite List search").attributes(key("defaultValue").value("0")).optional(),
                                 parameterWithName("size").description("page size"),
-                                parameterWithName("page").description("page Count")
+                                parameterWithName("page").description("page Count"),
+                                parameterWithName("deviceId").description("if categoryId is -1, user device Id")
                         ),
                         responseFields(
                                 fieldWithPath("message").description("return_message"),
