@@ -2,6 +2,8 @@ package com.depromeet.wepet.domains.location;
 
 import com.depromeet.wepet.config.GoogleConfig;
 import com.depromeet.wepet.domains.location.google.PlaceApiResponse;
+import com.depromeet.wepet.domains.place.PlaceRepository;
+import com.depromeet.wepet.domains.place.PlaceService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
@@ -18,7 +20,8 @@ public class LocationRepository {
     private GoogleConfig googleConfig;
     private LocationComparator locationComparator;
 
-    public LocationRepository(GoogleConfig googleConfig) {
+    public LocationRepository(GoogleConfig googleConfig,
+                              PlaceService placeService) {
         this.googleConfig = googleConfig;
         this.webClient = WebClient
                 .builder()

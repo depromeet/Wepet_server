@@ -2,6 +2,7 @@ package com.depromeet.wepet.domains.location;
 
 import com.depromeet.wepet.config.GoogleConfig;
 import com.depromeet.wepet.domains.location.google.PlaceApiResponse;
+import com.depromeet.wepet.domains.place.Place;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Data;
@@ -66,5 +67,20 @@ public class Location {
     // This function converts radians to decimal degrees
     private static double rad2deg(double rad) {
         return (rad * 180 / Math.PI);
+    }
+
+    public static Location of(Place place, double latitude, double longitude) {
+        return Location
+                .builder()
+                .name(place.getName())
+                .photoUrl(place.getPhotoUrl())
+                .latitude(place.getLatitude())
+                .longitude(place.getLongitude())
+                .placeId(place.getPlaceId())
+                .homePage(place.getHomePage())
+                .address(place.getAddress())
+                .phoneNumber(place.getPhoneNumber())
+                .distance(getDistance(latitude, longitude, place.getLatitude(), place.getLongitude(), DistanceType.METER))
+                .build();
     }
 }

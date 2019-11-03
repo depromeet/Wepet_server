@@ -79,9 +79,6 @@ public class LocationDocumentTests {
         List<Location> locationList = Arrays.asList(location);
 
         given(locationService.getLocations(latitude, longitude, distance, categoryId, pageable)).willReturn(new DefaultPage(locationList, pageable, 1));
-//        doReturn(new DefaultPage(locationList, any(Pageable.class), locationList.size()))
-//                .when(locationService)
-//                .getLocations(latitude, longitude, distance, categoryId , any(Pageable.class));
 
         ResultActions result = this.mockMvc.perform(
                 RestDocumentationRequestBuilders.get("/api/location/{latitude}/{longitude}?distance={distance}&categoryId={categoryId}&page=1&size=10", latitude, longitude, distance, categoryId)
