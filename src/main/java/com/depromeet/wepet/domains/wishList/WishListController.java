@@ -26,9 +26,10 @@ public class WishListController {
         return new ResponseEntity(Response.of(null), HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/{wishListId}")
-    public ResponseEntity<?> deleteWishList(@PathVariable("wishListId") long wishListId) {
-        wishListService.delete(wishListId);
+    @DeleteMapping("/{deviceId}/{placeId}")
+    public ResponseEntity<?> deleteWishList(@PathVariable("deviceId") String deviceId,
+                                            @PathVariable("placeId") String placeId) {
+        wishListService.delete(deviceId, placeId);
         return new ResponseEntity(Response.of(null), HttpStatus.OK);
     }
 }
