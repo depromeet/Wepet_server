@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -18,7 +20,9 @@ public class CategoryService {
     private CategoryRepository categoryRepository;
 
     public Collection<Category> getCategories() {
-        return categoryRepository.findAll();
+        Collection<Category> categories = categoryRepository.findAll();
+        categories.add(Category.getWishListCategory());
+        return categories;
     }
 
     public Category getCategory(long categoryId) {
@@ -45,5 +49,13 @@ public class CategoryService {
         Category category = categoryRepository.findById(categoryId).orElseThrow(() -> new WepetException(ErrorCode.NOT_EXISTS, HttpStatus.BAD_REQUEST, "category not found categoryId: " + categoryId));
         category.delete();
         categoryRepository.save(category);
+    }
+
+    public List<Category> getCategories(List<Long> categoryIds) {
+        List<Category> categories = categoryRepository.findAllById(categoryIds);
+        if (categoryIds.contains(new Long(-1))) {
+            categories.add(Category.getWishListCategory());
+        }
+        return categories;
     }
 }

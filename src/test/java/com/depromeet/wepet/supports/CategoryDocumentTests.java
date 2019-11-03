@@ -1,5 +1,6 @@
 package com.depromeet.wepet.supports;
 
+import com.depromeet.wepet.config.GoogleConfig;
 import com.depromeet.wepet.domains.category.Category;
 import com.depromeet.wepet.domains.category.CategoryController;
 import com.depromeet.wepet.domains.category.CategoryService;
@@ -45,6 +46,8 @@ public class CategoryDocumentTests {
 
     @MockBean
     private CategoryService categoryService;
+    @MockBean
+    private GoogleConfig googleConfig;
 
     @Test
     public void getCategories() throws Exception {

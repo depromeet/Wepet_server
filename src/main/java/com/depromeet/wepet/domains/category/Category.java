@@ -39,4 +39,13 @@ public class Category extends ModifiedAuditor {
     public void delete() {
         this.deleted = true;
     }
+
+    public static Category getWishListCategory() {
+        return Category
+                .builder()
+                .categoryId(new Long(-1))
+                .displayName("즐겨찾기")
+                .searchKeyword("wishList")
+                .build();
+    }
 }
