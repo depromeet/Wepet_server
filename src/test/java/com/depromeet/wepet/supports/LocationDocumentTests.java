@@ -5,32 +5,21 @@ import com.depromeet.wepet.domains.common.respose.DefaultPage;
 import com.depromeet.wepet.domains.location.Location;
 import com.depromeet.wepet.domains.location.LocationController;
 import com.depromeet.wepet.domains.location.LocationService;
-import com.depromeet.wepet.domains.weather.WeatherController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.mapping.JpaMetamodelMappingContext;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.doReturn;
-import static org.springframework.restdocs.snippet.Attributes.key;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -41,6 +30,7 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.request.RequestDocumentation.*;
+import static org.springframework.restdocs.snippet.Attributes.key;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -75,6 +65,7 @@ public class LocationDocumentTests {
                 .placeId("ChIJL1X9rHuhfDUR8egAvHo1-7A")
                 .latitude(37.5036507)
                 .longitude(127.004724)
+                .isWishList(false)
                 .build();
 
         List<Location> locationList = Arrays.asList(location);
@@ -118,6 +109,7 @@ public class LocationDocumentTests {
                                 fieldWithPath("data.content[].latitude").description("latitude"),
                                 fieldWithPath("data.content[].longitude").description("longitude"),
                                 fieldWithPath("data.content[].distance").description("distance from current location"),
+                                fieldWithPath("data.content[].wishList").description("if isWishList if true, contain wishList for user device"),
                                 fieldWithPath("data.size").description("page size"),
                                 fieldWithPath("data.number").description("page number"),
                                 fieldWithPath("data.first").description("is first"),
@@ -140,6 +132,7 @@ public class LocationDocumentTests {
         String placeId = "ChIJL1X9rHuhfDUR8egAvHo1-7A";
         double latitude = 37.5036507;
         double longitude = 127.004724;
+        String deviceId = "ASdf";
 
         Location location = Location
                 .builder()
@@ -151,13 +144,14 @@ public class LocationDocumentTests {
                 .homePage("https://www.marriott.com/hotels/travel/seljw-jw-marriott-hotel-seoul/?scid=bb1a189a-fec3-4d19-a255-54ba596febe2")
                 .address("대한민국 서울특별시 서초구 반포동 신반포로 176")
                 .phoneNumber("02-6282-6262")
+                .isWishList(false)
                 .build();
 
 
-        given(locationService.getLocation(latitude, longitude, placeId)).willReturn(location);
+        given(locationService.getLocation(latitude, longitude, placeId, deviceId)).willReturn(location);
 
         ResultActions result = this.mockMvc.perform(
-                RestDocumentationRequestBuilders.get("/api/location/{latitude}/{longitude}/{placeId}", latitude, longitude, placeId)
+                RestDocumentationRequestBuilders.get("/api/location/{latitude}/{longitude}/{placeId}?deviceId={deviceId}", latitude, longitude, placeId, deviceId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
         );
@@ -181,7 +175,8 @@ public class LocationDocumentTests {
                                 fieldWithPath("data.homePage").description("place homepageUrl"),
                                 fieldWithPath("data.address").description("place address"),
                                 fieldWithPath("data.phoneNumber").description("place phoneNumber"),
-                                fieldWithPath("data.distance").description("distance from current location")
+                                fieldWithPath("data.distance").description("distance from current location"),
+                                fieldWithPath("data.wishList").description("if isWishList if true, contain wishList for user device")
                         )
                 ));
 

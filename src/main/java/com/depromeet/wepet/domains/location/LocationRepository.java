@@ -20,8 +20,7 @@ public class LocationRepository {
     private GoogleConfig googleConfig;
     private LocationComparator locationComparator;
 
-    public LocationRepository(GoogleConfig googleConfig,
-                              PlaceService placeService) {
+    public LocationRepository(GoogleConfig googleConfig) {
         this.googleConfig = googleConfig;
         this.webClient = WebClient
                 .builder()

@@ -34,8 +34,9 @@ public class LocationController {
     public ResponseEntity<?> getLocation(
             @PathVariable("latitude") double latitude,
             @PathVariable("longitude") double longitude,
-            @PathVariable("placeId") String placeId) {
-        Location location = locationService.getLocation(latitude, longitude, placeId);
+            @PathVariable("placeId") String placeId,
+            @RequestParam("deviceId") String deviceId) {
+        Location location = locationService.getLocation(latitude, longitude, placeId, deviceId);
         return ResponseEntity.ok(Response.of(location));
     }
 }

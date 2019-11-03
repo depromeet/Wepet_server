@@ -87,10 +87,13 @@ public class WishListDocumentTests {
 
     @Test
     public void deleteCategory() throws Exception {
-        doNothing().when(wishListService).delete(1L);
+        String placeId = "sadgaesg";
+        String deviceId = "123";
+
+        doNothing().when(wishListService).delete(deviceId, placeId);
 
         ResultActions result = this.mockMvc.perform(
-                RestDocumentationRequestBuilders.delete("/api/wishList/{wishListId}", 1L)
+                RestDocumentationRequestBuilders.delete("/api/wishList/{deviceId}/{placeId}", deviceId, placeId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
         );
@@ -100,7 +103,8 @@ public class WishListDocumentTests {
                         getDocumentRequest(),
                         getDocumentResponse(),
                         pathParameters(
-                                parameterWithName("wishListId").description("wishList PK")
+                                parameterWithName("deviceId").description("user deviceId"),
+                                parameterWithName("placeId").description("google placeId")
                         ),
                         responseFields(
                                 fieldWithPath("message").description("return_message")
