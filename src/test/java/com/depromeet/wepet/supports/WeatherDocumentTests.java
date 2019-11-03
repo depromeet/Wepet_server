@@ -1,5 +1,6 @@
 package com.depromeet.wepet.supports;
 
+import com.depromeet.wepet.config.GoogleConfig;
 import com.depromeet.wepet.domains.category.CategoryController;
 import com.depromeet.wepet.domains.weather.Weather;
 import com.depromeet.wepet.domains.weather.WeatherCode;
@@ -40,6 +41,8 @@ public class WeatherDocumentTests {
 
     @MockBean
     private WeatherService weatherService;
+    @MockBean
+    private GoogleConfig googleConfig;
 
     @Test
     public void getWeather() throws Exception {

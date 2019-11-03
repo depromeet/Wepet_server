@@ -2,13 +2,15 @@ package com.depromeet.wepet.domains.location;
 
 import com.depromeet.wepet.domains.category.Category;
 import com.depromeet.wepet.domains.category.CategoryService;
+import com.depromeet.wepet.domains.common.respose.DefaultPage;
 import com.depromeet.wepet.domains.location.google.PlaceApiResponse;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,11 +20,13 @@ public class LocationService {
     private String googleApiKey;
     private List<String> fileds;
     private CategoryService categoryService;
-
+    private LocationRepository locationRepository;
+    private LocationComparator locationComparator;
     public LocationService(@Value("${google.api.url}") String url,
                             @Value("${google.api.key}") String googleApiKey,
                             @Value("${google.api.fields}") List<String> fileds,
-                           CategoryService categoryService) {
+                           CategoryService categoryService,
+                           LocationRepository locationRepository) {
         this.webClient = WebClient
                 .builder()
                 .baseUrl(url)
@@ -30,44 +34,35 @@ public class LocationService {
         this.googleApiKey = googleApiKey;
         this.categoryService = categoryService;
         this.fileds = fileds;
+        this.locationRepository = locationRepository;
+        this.locationComparator = new LocationComparator();
     }
 
-    public Collection<Location> getLocations(double latitude, double longitude, long distance, long categoryId) {
-        Collection<Category> categories = new ArrayList<>();
-        if (categoryId == 0) {
-            categories = categoryService.getCategories();
-        } else {
-            categories.add(categoryService.getCategory(categoryId));
+    public DefaultPage<List<Location>> getLocations(double latitude, double longitude, long distance, Long categoryId, Pageable pageable) {
+        Category category = categoryService.getCategory(categoryId);
+
+        Optional<List<PlaceApiResponse.Result>> results = locationRepository.getLocations(latitude, longitude, distance, category.getSearchKeyword());
+        if (!results.isPresent()) {
+            return DefaultPage.empty();
         }
 
-        Collection<Location> locations = new ArrayList<>();
-        for (Category category : categories) {
-            String searchKeyword = category.getSearchKeyword();
-            PlaceApiResponse apiResponse = webClient
-                    .get()
-                    .uri("/nearbysearch/json?location={latitude},{longitude}&radius={distance}&type={searchKeyword}&key={googleApiKey}&language=ko", latitude, longitude, distance, searchKeyword, googleApiKey)
-                    .retrieve()
-                    .bodyToMono(PlaceApiResponse.class)
-                    .block();
+        List<PlaceApiResponse.Result> list = results.get();
+        List<Location> locationList = list
+                .stream()
+                .map(res -> Location.of(res, latitude, longitude))
+                .collect(Collectors.toList());
+        locationList.sort(locationComparator);
+        List<Location> subLocationList = locationList.subList((pageable.getPageNumber() - 1) * pageable.getPageSize(), pageable.getPageNumber() * pageable.getPageSize());
 
-            locations.addAll(
-                    apiResponse.getResults()
-                            .stream()
-                            .map(Location::of)
-                            .collect(Collectors.toList())
-            );
-        }
-        return locations.stream().distinct().collect(Collectors.toList());
+        return new DefaultPage(subLocationList, pageable, locationList.size());
     }
 
-    public Location getLocation(String placeId) {
-        PlaceApiResponse apiResponse = webClient
-                .get()
-                .uri("/details/json?key={key}&language=ko&place_id={placeId}", googleApiKey, placeId)
-                .retrieve()
-                .bodyToMono(PlaceApiResponse.class)
-                .block();
-        return Location.of(apiResponse.getResult());
+    public Location getLocation(double latitude, double longitude, String placeId) {
+        Optional<PlaceApiResponse.Result> results = locationRepository.getLocation(placeId);
+        if (!results.isPresent()) {
+            return null;
+        }
+        return Location.of(results.get(), latitude, longitude);
     }
 
 }

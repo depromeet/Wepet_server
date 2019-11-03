@@ -44,6 +44,11 @@ spring:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
+google:
+  api:
+    key: ENC(QQ/RtYS4fOmFVbkREk81Xt1F1JBS9QXCCJAouZJXm391sygjSjKx4ERc07mF7xL9)
+    url: https://maps.googleapis.com/maps/api/place
+    fields: photos,formatted_address,name,rating,opening_hours,geometry
 ---
 spring:
   profiles: dev
