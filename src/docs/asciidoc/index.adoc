@@ -181,3 +181,41 @@ include::{snippets}/GET_location/response-fields.adoc[]
 ===== Response example
 
 include::{snippets}/GET_location/response-body.adoc[]
+
+== WishList API
+=== POST wishList
+
+==== Request
+
+include::{snippets}/POST_wishList/http-request.adoc[]
+
+==== Request Body
+
+include::{snippets}/POST_wishList/request-body.adoc[]
+
+==== Response
+
+include::{snippets}/POST_wishList/response-fields.adoc[]
+
+===== Response example
+
+include::{snippets}/POST_wishList/response-body.adoc[]
+
+
+=== DELETE wishList
+
+==== Request
+
+include::{snippets}/DELETE_wishList/http-request.adoc[]
+
+==== pathParameters
+
+include::{snippets}/DELETE_wishList/path-parameters.adoc[]
+
+==== Response
+
+include::{snippets}/DELETE_wishList/response-fields.adoc[]
+
+===== Response example
+
+include::{snippets}/DELETE_wishList/response-body.adoc[]

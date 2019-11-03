@@ -33,9 +33,9 @@ spring:
   profiles: local
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://wepet-dev.cyhugcavufto.ap-northeast-2.rds.amazonaws.com:3306/wepet?useUnicode=true&characterEncoding=utf8
-    username: ENC(tKavxq6drPDnrN5H9F9aqA==)
-    password: ENC(YYN37FWK3AEk/w6usxt97T8i//UgezEJ)
+    url: jdbc:mysql://wepet.c9hvacjkfrbx.ap-northeast-2.rds.amazonaws.com:3306/wepet?useUnicode=true&characterEncoding=utf8
+    username: ENC(5uOaaNR4Lil43YszR0egn+pr0NlfZMbF)
+    password: ENC(i0qETP6tTt2dCKbE8SGCdY5D9s5KcqCv)
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
@@ -44,11 +44,6 @@ spring:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
-google:
-  api:
-    key: ENC(QQ/RtYS4fOmFVbkREk81Xt1F1JBS9QXCCJAouZJXm391sygjSjKx4ERc07mF7xL9)
-    url: https://maps.googleapis.com/maps/api/place
-    fields: photos,formatted_address,name,rating,opening_hours,geometry
 ---
 spring:
   profiles: dev

@@ -19,14 +19,14 @@ public class LocationController {
         this.locationService = locationService;
     }
 
-    // TODO 다중 카테고리
     @GetMapping("/{latitude}/{longitude}")
     public ResponseEntity<?> getLocations(@PathVariable("latitude") double latitude,
                                           @PathVariable("longitude") double longitude,
                                           @RequestParam(value = "categoryId", defaultValue = "0") String categoryId,
                                           @RequestParam(value = "distance", defaultValue = "3000") long distance,
+                                          @RequestParam(value = "deviceId", required = false) String deviceId,
                                           Pageable pageable) {
-        DefaultPage<List<Location>> locations = locationService.getLocations(latitude, longitude, distance, Long.parseLong(categoryId), pageable);
+        DefaultPage<?> locations = locationService.getLocations(latitude, longitude, distance, Long.parseLong(categoryId), pageable, deviceId);
         return ResponseEntity.ok(Response.of(locations));
     }
 
